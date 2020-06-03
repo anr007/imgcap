@@ -1,5 +1,5 @@
 keras==2.2.4
 numpy==1.15.4
-nltk==3.4
+nltk==3.4.5
 Pillow==5.4.1
 tensorflow==1.14
