@@ -47,7 +47,13 @@ def generate_caption_from_image_greedy(img_arr):
 
 def generate_caption_greedy(b64_img_str): # from_base64_img_str
     
-    img_data = image.load_img(BytesIO(base64.urlsafe_b64decode(b64_img_str)), target_size=(299, 299))
+    # broken as of keras-preprocessing:1.2.0
+    # img_data = image.load_img(BytesIO(base64.urlsafe_b64decode(b64_img_str)), target_size=(299, 299))
+
+    img_data = Image.open(BytesIO(base64.urlsafe_b64decode(b64_img_str)))
+    img_data = img_data.convert('RGB')
+    img_data = img_data.resize((299,299),Image.NEAREST)
+
     img_arr = image.img_to_array(img_data)
     
     #generate caption
@@ -82,7 +88,13 @@ def generate_caption_from_image_beam_search(img_arr, beam_width = 5, alpha = 0.7
 
 def generate_caption_beam_search(b64_img_str): # from_base64_img_str
     
-    img_data = image.load_img(BytesIO(base64.urlsafe_b64decode(b64_img_str)), target_size=(299, 299))
+    # broken as of keras-preprocessing:1.2.0
+    # img_data = image.load_img(BytesIO(base64.urlsafe_b64decode(b64_img_str)), target_size=(299, 299))
+     
+    img_data = Image.open(BytesIO(base64.urlsafe_b64decode(b64_img_str)))
+    img_data = img_data.convert('RGB')
+    img_data = img_data.resize((299,299),Image.NEAREST)
+
     img_arr = image.img_to_array(img_data)
     
     #generate caption
